@@ -1,7 +1,11 @@
 import pytest_mock
 from unittest import mock
 from appdaemon_testing.pytest import automation_fixture
-from apps.switch_scenes.switch_scenes import SwitchScenes
+
+import sys
+sys.path.append('apps/switch_scenes')
+
+from switch_scenes import SwitchScenes
 
 HASS_LISTEN_STATE = "listen_state"
 HASS_RUN_IN = "run_in"
