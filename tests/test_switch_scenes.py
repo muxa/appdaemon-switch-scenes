@@ -86,7 +86,7 @@ def test_timeout_cancelled_when_switch_toggled_within_timout(hass_driver, switch
     cancel_timer = hass_driver.get_mock(HASS_CANCEL_TIMER)
     cancel_timer.assert_called()
 
-def test_scene_applied_when_switch_toggled_within_timeout(hass_driver, switch_scenes_app: SwitchScenes, mocker: pytest_mock.MockerFixture):
+def test_scene_applied_when_switch_in_off_state_toggled_within_timeout(hass_driver, switch_scenes_app: SwitchScenes, mocker: pytest_mock.MockerFixture):
     with hass_driver.setup():
         hass_driver.set_state(MAIN_SWITCH, "off")
 
@@ -94,6 +94,17 @@ def test_scene_applied_when_switch_toggled_within_timeout(hass_driver, switch_sc
 
     hass_driver.set_state(MAIN_SWITCH, "on")
     hass_driver.set_state(MAIN_SWITCH, "off")
+
+    apply_scene_spy.assert_called_once_with(1)
+
+def test_scene_applied_when_switch_in_on_state_toggled_within_timeout(hass_driver, switch_scenes_app: SwitchScenes, mocker: pytest_mock.MockerFixture):
+    with hass_driver.setup():
+        hass_driver.set_state(MAIN_SWITCH, "on")
+
+    apply_scene_spy = mocker.spy(switch_scenes_app, "apply_scene")
+
+    hass_driver.set_state(MAIN_SWITCH, "off")
+    hass_driver.set_state(MAIN_SWITCH, "on")
 
     apply_scene_spy.assert_called_once_with(1)
 

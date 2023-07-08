@@ -1,6 +1,7 @@
 # Switch Scenes for AppDaemon
 
-Extend a light switch to be able to control other switches.
+Extend a light switch to be able to control other switches. 
+Toggle the main switch on and off (or off and on) within 1 second to change the scenes.
 
 ## Arguments
 
